@@ -10,6 +10,7 @@ import java.util.UUID;
  */
 public class Resume implements Comparable<Resume> {
 
+    //добавил для проверки работы GITHub
     // Unique identifier
     private final String uuid;
     private final String fullName;
