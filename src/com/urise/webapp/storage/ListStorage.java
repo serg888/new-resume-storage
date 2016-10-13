@@ -8,7 +8,7 @@ import java.util.*;
  * Created by Сергей on 01.10.2016.
  */
 
-public class ListStorage extends AbstractStorage {
+public class ListStorage extends AbstractStorage<Integer> {
     private List<Resume> list;
 
     public ListStorage() {
@@ -31,28 +31,28 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Resume r, Object searchKey) {
-        list.set((Integer)searchKey,r);
+    protected void doUpdate(Resume r, Integer searchKey) {
+        list.set(searchKey,r);
     }
 
     @Override
-    protected boolean isExist(Object searchKey) {
-        return ((Integer)searchKey==-1)?false:true;
+    protected boolean isExist(Integer searchKey) {
+        return (searchKey==-1)?false:true;
     }
 
     @Override
-    protected void doSave(Resume r, Object searchKey) {
+    protected void doSave(Resume r, Integer searchKey) {
         list.add(r);
     }
 
     @Override
-    protected void doDelete(Object searchKey) {
-        int i=(Integer)searchKey;
+    protected void doDelete(Integer searchKey) {
+        int i=searchKey;
         list.remove(i);
     }
 
     @Override
-    protected Object getSearchKey(String uuid) {
+    protected Integer getSearchKey(String uuid) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getUuid().equals(uuid)) {
                 return i;
@@ -62,7 +62,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume doGet(Object searchKey) {
-        return list.get((Integer)searchKey);
+    protected Resume doGet(Integer searchKey) {
+        return list.get(searchKey);
     }
 }

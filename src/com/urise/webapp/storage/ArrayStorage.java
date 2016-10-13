@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class ArrayStorage extends AbstractArrayStorage{
 
     @Override
-    protected Object getSearchKey(String uuid){
+    protected Integer getSearchKey(String uuid){
         //если резюме не найдено, возвращает -1, иначе индекс в массиве
         for(int i=0;i<size;i++){
             if(storage[i].getUuid().equals(uuid)) return i;

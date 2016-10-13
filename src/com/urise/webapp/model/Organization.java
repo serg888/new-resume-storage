@@ -1,7 +1,8 @@
 package com.urise.webapp.model;
 
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Сергей on 10.10.2016.
@@ -9,21 +10,15 @@ import java.util.Objects;
 public class Organization {
     private final Link homePage;
 
-    private final LocalDate startDate;
-    private final LocalDate endDate;
-
-    private final String title;
-    private final String description;
+    private final List<BlockDescription> blockDescriptions = new ArrayList<>();
 
     public Organization(String name, String url, LocalDate startDate, LocalDate endDate, String title, String description) {
         this.homePage = new Link(name, url);
-        Objects.requireNonNull(startDate, "startDate must not be null");
-        Objects.requireNonNull(endDate, "endDate must not be null");
-        Objects.requireNonNull(title, "title must not be null");
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.title = title;
-        this.description = description;
+        blockDescriptions.add(new BlockDescription(startDate, endDate, title, description));
+    }
+
+    public void addNewBlockDescription(LocalDate startDate, LocalDate endDate, String title, String description) {
+        blockDescriptions.add(new BlockDescription(startDate, endDate, title, description));
     }
 
     @Override
@@ -34,20 +29,14 @@ public class Organization {
         Organization that = (Organization) o;
 
         if (!homePage.equals(that.homePage)) return false;
-        if (!startDate.equals(that.startDate)) return false;
-        if (!endDate.equals(that.endDate)) return false;
-        if (!title.equals(that.title)) return false;
-        return description != null ? description.equals(that.description) : that.description == null;
+        return blockDescriptions.equals(that.blockDescriptions);
 
     }
 
     @Override
     public int hashCode() {
         int result = homePage.hashCode();
-        result = 31 * result + startDate.hashCode();
-        result = 31 * result + endDate.hashCode();
-        result = 31 * result + title.hashCode();
-        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + blockDescriptions.hashCode();
         return result;
     }
 
@@ -55,10 +44,7 @@ public class Organization {
     public String toString() {
         return "Organization{" +
                 "homePage=" + homePage +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
+                ", blockDescriptions=" + blockDescriptions +
                 '}';
     }
 }

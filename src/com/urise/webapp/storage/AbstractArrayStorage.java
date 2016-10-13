@@ -14,34 +14,35 @@ import java.util.List;
  * Array based storage for Resumes
  * Test Branches
  */
-public abstract class AbstractArrayStorage extends AbstractStorage {
+public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     protected static final int ARRAY_LENGHT = 1000;
     protected Resume[] storage = new Resume[ARRAY_LENGHT];
     protected int size = 0;
 
     protected abstract void insert(Resume r, int i);
+
     protected abstract void fillDeletedElement(int i);
 
     @Override
-    protected void doSave(Resume r, Object searchKey){
-        int i=(Integer)searchKey;
-        if(i<0){
-            if(size<ARRAY_LENGHT){
+    protected void doSave(Resume r, Integer searchKey) {
+        int i = searchKey;
+        if (i < 0) {
+            if (size < ARRAY_LENGHT) {
                 insert(r, i);
-            }else {
+            } else {
                 throw new StorageException("Error: Not enough space", r.getUuid());
             }
         }
     }
 
     @Override
-    protected void doUpdate(Resume r, Object searchKey) {
-        storage[(Integer) searchKey] = r;
+    protected void doUpdate(Resume r, Integer searchKey) {
+        storage[searchKey] = r;
     }
 
     @Override
-    protected void doDelete(Object searchKey){
-        int i=(Integer)searchKey;
+    protected void doDelete(Integer searchKey) {
+        int i = searchKey;
         if (i >= 0) {
             storage[i] = storage[size - 1];
             fillDeletedElement(i);
@@ -57,25 +58,25 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume doGet(Object searchKey){
-        int i=(Integer)searchKey;
-        return (i<0)?null:storage[i];
+    protected Resume doGet(Integer searchKey) {
+        int i = searchKey;
+        return (i < 0) ? null : storage[i];
     }
 
     @Override
     public List<Resume> doCopyAll() {
-        List<Resume>list=Arrays.asList(Arrays.copyOfRange(storage,0,size));
+        List<Resume> list = Arrays.asList(Arrays.copyOfRange(storage, 0, size));
         return list;
     }
 
     @Override
-    public int size(){
+    public int size() {
         return size;
     }
 
     @Override
-    protected boolean isExist(Object searchKey) {
-        return ((Integer)searchKey<0)?false:true;
+    protected boolean isExist(Integer searchKey) {
+        return searchKey >= 0;
     }
 
 }
