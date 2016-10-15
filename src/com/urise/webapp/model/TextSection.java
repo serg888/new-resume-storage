@@ -6,6 +6,8 @@ import java.util.Objects;
  * Created by Сергей on 10.10.2016.
  */
 public class TextSection extends Section {
+    private static final long serialVersionUID=1L;
+
     private final String content;
 
     public TextSection(String content) {

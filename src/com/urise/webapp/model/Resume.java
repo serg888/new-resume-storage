@@ -1,5 +1,6 @@
 package com.urise.webapp.model;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
@@ -8,7 +9,9 @@ import java.util.UUID;
 /**
  * com.urise.webapp.model.com.urise.webapp.model.Resume class
  */
-public class Resume implements Comparable<Resume> {
+public class Resume implements Comparable<Resume>, Serializable {
+    private static final long serialVersionUID=1L;
+
 
     //добавил для проверки работы GITHubjjjqq
     // Unique identifier
@@ -48,6 +51,10 @@ public class Resume implements Comparable<Resume> {
     public Section getSection(SectionType type) {
         return sections.get(type);
     }
+
+    public void addContact(ContactType contactType, String s){contacts.put(contactType, s);}
+
+    public void addSection(SectionType sectionType, Section section){sections.put(sectionType, section);}
 
     @Override
     public boolean equals(Object o) {
