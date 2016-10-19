@@ -9,6 +9,11 @@ import java.util.List;
 import java.util.Objects;
 
 import com.urise.webapp.util.DateUtil;
+import com.urise.webapp.util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import static com.urise.webapp.util.DateUtil.NOW;
 import static com.urise.webapp.util.DateUtil.of;
@@ -18,10 +23,14 @@ import static com.urise.webapp.util.DateUtil.of;
 /**
  * Created by Сергей on 10.10.2016.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable{
-    private final Link homePage;
+    private Link homePage;
 
     private List<Position> positions = new ArrayList<>();
+
+    public Organization() {
+    }
 
     public Organization(String name, String url, Position...positions) {
         this(new Link(name,url), Arrays.asList(positions));
@@ -66,13 +75,18 @@ public class Organization implements Serializable{
     /**
      * Created by Сергей on 12.10.2016.
      */
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable{
         private static final long serialVersionUID=1L;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate startDate;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate endDate;
+        private String title;
+        private String description;
 
-        private final LocalDate startDate;
-        private final LocalDate endDate;
-        private final String title;
-        private final String description;
+        public Position() {
+        }
 
         public Position(LocalDate startDate, LocalDate endDate, String title, String description ) {
             Objects.requireNonNull(startDate,"startDate must not be null");

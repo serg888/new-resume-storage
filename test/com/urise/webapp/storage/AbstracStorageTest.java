@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public abstract class AbstracStorageTest {
     protected Storage storage;
 
-   protected static final File STORAGE_DIR =new File("C:/Users/Сергей/resume-storage/storage");
+    protected static final File STORAGE_DIR = new File("C:/Users/Сергей/resume-storage/storage");
 
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
@@ -38,33 +38,33 @@ public abstract class AbstracStorageTest {
         R3 = new Resume(UUID_3, "Name3");
         R4 = new Resume(UUID_4, "Name4");
 
-        R1.addContact(ContactType.MAIL,"serg888@mail.ru");
-        R1.addContact(ContactType.PHONE,"8-933-300-4498");
-        R1.addSection(SectionType.OBJECTIVE,new TextSection("Objective1"));
-        R1.addSection(SectionType.PERSONAL,new TextSection("Personal data"));
-        R1.addSection(SectionType.ACHIEVEMENT,new ListSection("achievment1","achievment1","achievment2"));
-        R1.addSection(SectionType.QUALIFICATIONS,new ListSection("Turbo Pascal","1C","Java"));
+        R1.addContact(ContactType.MAIL, "serg888@mail.ru");
+        R1.addContact(ContactType.PHONE, "8-933-300-4498");
+        R1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
+        R1.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
+        R1.addSection(SectionType.ACHIEVEMENT, new ListSection("achievment1", "achievment1", "achievment2"));
+        R1.addSection(SectionType.QUALIFICATIONS, new ListSection("Turbo Pascal", "1C", "Java"));
         R1.addSection(SectionType.EXPERIENCE,
                 new OrganizationSection(
-                        new Organization("Organization11","http://organization11.ru",
-                                new Organization.Position(2005, Month.JANUARY,"position1","contenet1"),
-                                new Organization.Position(2001,Month.MARCH,2005,Month.JANUARY,"position2","content2"))
+                        new Organization("Organization11", "http://organization11.ru",
+                                new Organization.Position(2005, Month.JANUARY, "position1", "contenet1"),
+                                new Organization.Position(2001, Month.MARCH, 2005, Month.JANUARY, "position2", "content2"))
                 ));
         R1.addSection(SectionType.EDUCATION,
                 new OrganizationSection(
-                        new Organization("Institute",null,
-                                new Organization.Position(1996,Month.JANUARY,2000,Month.DECEMBER,"aspirant",null),
-                                new Organization.Position(2001,Month.MARCH,2005,Month.JANUARY,"student","IT facultet")),
-                        new Organization("Organisation12","http://organisation12.ru")
+                        new Organization("Institute", null,
+                                new Organization.Position(1996, Month.JANUARY, 2000, Month.DECEMBER, "aspirant", null),
+                                new Organization.Position(2001, Month.MARCH, 2005, Month.JANUARY, "student", "IT facultet")),
+                        new Organization("Organisation12", "http://organisation12.ru")
                 ));
 
-        R2.addContact(ContactType.SKYPE,"skype2");
-        R2.addContact(ContactType.PHONE,"phone2");
+        R2.addContact(ContactType.SKYPE, "skype2");
+        R2.addContact(ContactType.PHONE, "phone2");
         R2.addSection(SectionType.EXPERIENCE,
                 new OrganizationSection(
-                        new Organization("Organization2","http://organization2.ru",
-                                new Organization.Position(2015, Month.JANUARY,"position1","content1")
-                              )));
+                        new Organization("Organization2", "http://organization2.ru",
+                                new Organization.Position(2015, Month.JANUARY, "position1", "content1")
+                        )));
     }
 
 
@@ -88,23 +88,18 @@ public abstract class AbstracStorageTest {
         assertGet(R4);
     }
 
-    @Test(expected = NotExistStorageException.class)
+    @Test
     public void update() throws Exception {
-        Resume newResume=new Resume(UUID_1, "Zhenya");
-        Resume oldResume= R1;
+        Resume newResume = new Resume(UUID_1, "Zhenya");
         storage.update(newResume);
-        assertSize(3);
-        assertEquals(newResume,storage.get(UUID_1));
-        assertTrue(storage.get(UUID_1)!=oldResume);
-        storage.update(R4);
-
+        assertTrue(newResume.equals(storage.get(UUID_1)));
     }
 
     @Test(expected = NotExistStorageException.class)
     public void delete() throws Exception {
         storage.delete(UUID_1);
         assertSize(2);
-        assertEquals(null,storage.get(UUID_1));
+        assertEquals(null, storage.get(UUID_1));
     }
 
     @Test
@@ -120,9 +115,9 @@ public abstract class AbstracStorageTest {
         assertGet(R3);
     }
 
-    @Test(expected =NotExistStorageException.class )
-    public void getNotExist() throws Exception{
-        assertEquals(null,storage.get("dummy"));
+    @Test(expected = NotExistStorageException.class)
+    public void getNotExist() throws Exception {
+        assertEquals(null, storage.get("dummy"));
     }
 
     @Test
@@ -140,9 +135,9 @@ public abstract class AbstracStorageTest {
 
     @Test(expected = ExistStorageException.class)
     public void saveExistRezume() throws Exception {
-        Resume r=new Resume(UUID_1, "Vasya");
-        storage.save(new Resume(UUID_1,"Vasya" ));
-        assertTrue(r!=storage.get(UUID_1));
+        Resume r = new Resume(UUID_1, "Vasya");
+        storage.save(new Resume(UUID_1, "Vasya"));
+        assertTrue(r != storage.get(UUID_1));
     }
 
 
