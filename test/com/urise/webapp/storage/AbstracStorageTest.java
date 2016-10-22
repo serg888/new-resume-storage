@@ -111,6 +111,8 @@ public abstract class AbstracStorageTest {
     @Test
     public void get() throws Exception {
         assertGet(R1);
+        Resume r1=storage.get(R1.getUuid());
+        System.out.println(r1);
         assertGet(R2);
         assertGet(R3);
     }

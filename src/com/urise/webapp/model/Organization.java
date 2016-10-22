@@ -19,12 +19,11 @@ import static com.urise.webapp.util.DateUtil.NOW;
 import static com.urise.webapp.util.DateUtil.of;
 
 
-
 /**
  * Created by Сергей on 10.10.2016.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Organization implements Serializable{
+public class Organization implements Serializable {
     private Link homePage;
 
     private List<Position> positions = new ArrayList<>();
@@ -32,17 +31,25 @@ public class Organization implements Serializable{
     public Organization() {
     }
 
-    public Organization(String name, String url, Position...positions) {
-        this(new Link(name,url), Arrays.asList(positions));
+    public Organization(String name, String url, Position... positions) {
+        this(new Link(name, url), Arrays.asList(positions));
     }
 
     public Organization(Link link, List<Position> positions) {
-        this.homePage=link;
+        this.homePage = link;
         this.positions = positions;
     }
 
     public void addNewBlockDescription(LocalDate startDate, LocalDate endDate, String title, String description) {
         positions.add(new Position(startDate, endDate, title, description));
+    }
+
+    public Link getHomePage() {
+        return homePage;
+    }
+
+    public List<Position> getPositions() {
+        return positions;
     }
 
     @Override
@@ -76,8 +83,8 @@ public class Organization implements Serializable{
      * Created by Сергей on 12.10.2016.
      */
     @XmlAccessorType(XmlAccessType.FIELD)
-    public static class Position implements Serializable{
-        private static final long serialVersionUID=1L;
+    public static class Position implements Serializable {
+        private static final long serialVersionUID = 1L;
         @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate startDate;
         @XmlJavaTypeAdapter(LocalDateAdapter.class)
@@ -88,23 +95,23 @@ public class Organization implements Serializable{
         public Position() {
         }
 
-        public Position(LocalDate startDate, LocalDate endDate, String title, String description ) {
-            Objects.requireNonNull(startDate,"startDate must not be null");
-            Objects.requireNonNull(endDate,"endDate must not be null");
+        public Position(LocalDate startDate, LocalDate endDate, String title, String description) {
+            Objects.requireNonNull(startDate, "startDate must not be null");
+            Objects.requireNonNull(endDate, "endDate must not be null");
             Objects.requireNonNull(title, "title must not be null");
             this.startDate = startDate;
             this.endDate = endDate;
-            this.title=title;
-            this.description=description;
+            this.title = title;
+            this.description = description;
 
         }
 
         public Position(int startYear, Month startMonth, String title, String description) {
-            this(of(startYear,startMonth),NOW,title,description);
+            this(of(startYear, startMonth), NOW, title, description);
         }
 
-        public Position(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description){
-            this(of(startYear,startMonth),of(endYear,endMonth),title,description);
+        public Position(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description) {
+            this(of(startYear, startMonth), of(endYear, endMonth), title, description);
         }
 
         public LocalDate getStartDate() {
