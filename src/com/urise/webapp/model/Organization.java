@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import com.urise.webapp.util.DateUtil;
 import com.urise.webapp.util.LocalDateAdapter;
 
 import javax.xml.bind.annotation.XmlAccessType;

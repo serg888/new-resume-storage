@@ -1,6 +1,7 @@
 package com.urise.webapp.storage;
 
 
+import com.urise.webapp.Config;
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.*;
@@ -20,7 +21,9 @@ import static org.junit.Assert.*;
 public abstract class AbstracStorageTest {
     protected Storage storage;
 
-    protected static final File STORAGE_DIR = new File("C:/Users/Сергей/resume-storage/storage");
+        protected static final File STORAGE_DIR = Config.get().getStorageDir();
+    //protected static final File STORAGE_DIR=new File("C:/Users/Сергей/resume-storage/storage");
+   // protected static final File STORAGE_DIR=new File("./storage");
 
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
@@ -111,7 +114,7 @@ public abstract class AbstracStorageTest {
     @Test
     public void get() throws Exception {
         assertGet(R1);
-        Resume r1=storage.get(R1.getUuid());
+        Resume r1 = storage.get(R1.getUuid());
         System.out.println(r1);
         assertGet(R2);
         assertGet(R3);

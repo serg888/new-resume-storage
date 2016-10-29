@@ -1,10 +1,5 @@
 package com.urise.webapp.storage;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
 /**
  * Created by Сергей on 02.10.2016.
  */
