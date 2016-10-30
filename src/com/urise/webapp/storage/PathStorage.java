@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -94,7 +95,12 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     protected List<Resume> doCopyAll() {
-        return getFilesList().map(this::doGet).collect(Collectors.toList());
+        return getFilesList().map(new Function<Path, Resume>() {
+            @Override
+            public Resume apply(Path path) {
+                return PathStorage.this.doGet(path);
+            }
+        }).collect(Collectors.toList());
     }
 
     private String getFileName(Path path) {

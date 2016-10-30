@@ -41,6 +41,7 @@ public abstract class AbstracStorageTest {
         R3 = new Resume(UUID_3, "Name3");
         R4 = new Resume(UUID_4, "Name4");
 
+/*
         R1.addContact(ContactType.MAIL, "serg888@mail.ru");
         R1.addContact(ContactType.PHONE, "8-933-300-4498");
         R1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
@@ -68,6 +69,7 @@ public abstract class AbstracStorageTest {
                         new Organization("Organization2", "http://organization2.ru",
                                 new Organization.Position(2015, Month.JANUARY, "position1", "content1")
                         )));
+*/
     }
 
 
