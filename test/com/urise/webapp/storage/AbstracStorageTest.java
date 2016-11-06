@@ -12,6 +12,7 @@ import java.io.File;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -25,10 +26,10 @@ public abstract class AbstracStorageTest {
     //protected static final File STORAGE_DIR=new File("C:/Users/Сергей/resume-storage/storage");
    // protected static final File STORAGE_DIR=new File("./storage");
 
-    private static final String UUID_1 = "uuid1";
-    private static final String UUID_2 = "uuid2";
-    private static final String UUID_3 = "uuid3";
-    private static final String UUID_4 = "uuid4";
+    private static final String UUID_1 = UUID.randomUUID().toString();
+    private static final String UUID_2 = UUID.randomUUID().toString();
+    private static final String UUID_3 = UUID.randomUUID().toString();
+    private static final String UUID_4 = UUID.randomUUID().toString();
 
     protected static final Resume R1;
     protected static final Resume R2;
@@ -41,10 +42,10 @@ public abstract class AbstracStorageTest {
         R3 = new Resume(UUID_3, "Name3");
         R4 = new Resume(UUID_4, "Name4");
 
-/*
+
         R1.addContact(ContactType.MAIL, "serg888@mail.ru");
         R1.addContact(ContactType.PHONE, "8-933-300-4498");
-        R1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
+/*        R1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
         R1.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
         R1.addSection(SectionType.ACHIEVEMENT, new ListSection("achievment1", "achievment1", "achievment2"));
         R1.addSection(SectionType.QUALIFICATIONS, new ListSection("Turbo Pascal", "1C", "Java"));
@@ -61,10 +62,10 @@ public abstract class AbstracStorageTest {
                                 new Organization.Position(2001, Month.MARCH, 2005, Month.JANUARY, "student", "IT facultet")),
                         new Organization("Organisation12", "http://organisation12.ru")
                 ));
-
+*/
         R2.addContact(ContactType.SKYPE, "skype2");
         R2.addContact(ContactType.PHONE, "phone2");
-        R2.addSection(SectionType.EXPERIENCE,
+/*        R2.addSection(SectionType.EXPERIENCE,
                 new OrganizationSection(
                         new Organization("Organization2", "http://organization2.ru",
                                 new Organization.Position(2015, Month.JANUARY, "position1", "content1")

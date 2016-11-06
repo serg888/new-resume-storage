@@ -9,7 +9,7 @@ import com.urise.webapp.storage.serializer.DataStreamSerializer;
 public class SqlStorageTest extends AbstracStorageTest {
 
     public SqlStorageTest() {
-        super(new SqlStorage(Config.get().getDbUrl(),Config.get().getDbUser(),Config.get().getDbPassword()));
+        super(Config.get().getStorage());
     }
 
 }
