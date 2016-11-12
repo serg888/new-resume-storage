@@ -45,10 +45,14 @@ public abstract class AbstracStorageTest {
 
         R1.addContact(ContactType.MAIL, "serg888@mail.ru");
         R1.addContact(ContactType.PHONE, "8-933-300-4498");
-/*        R1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
+        R4.addContact(ContactType.SKYPE, "skype4");
+        R4.addContact(ContactType.PHONE, "phone4");
+
+        R1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
         R1.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
         R1.addSection(SectionType.ACHIEVEMENT, new ListSection("achievment1", "achievment1", "achievment2"));
         R1.addSection(SectionType.QUALIFICATIONS, new ListSection("Turbo Pascal", "1C", "Java"));
+/*
         R1.addSection(SectionType.EXPERIENCE,
                 new OrganizationSection(
                         new Organization("Organization11", "http://organization11.ru",
@@ -63,6 +67,7 @@ public abstract class AbstracStorageTest {
                         new Organization("Organisation12", "http://organisation12.ru")
                 ));
 */
+
         R2.addContact(ContactType.SKYPE, "skype2");
         R2.addContact(ContactType.PHONE, "phone2");
 /*        R2.addSection(SectionType.EXPERIENCE,
@@ -97,6 +102,11 @@ public abstract class AbstracStorageTest {
     @Test
     public void update() throws Exception {
         Resume newResume = new Resume(UUID_1, "Zhenya");
+        newResume.addContact(ContactType.MAIL, "zh@mail.ru");
+        newResume.addContact(ContactType.PHONE, "888888");
+        newResume.addContact(ContactType.SKYPE, "skype-zzzzzzz");
+        newResume.addContact(ContactType.MOBILE, "99866567464");
+
         storage.update(newResume);
         assertTrue(newResume.equals(storage.get(UUID_1)));
     }
